@@ -1,0 +1,25 @@
+﻿{
+"nodes":[
+{ "name": "尤里·诺尔施泰因"   , "image" : "尤里.png" },
+{ "name": "弗雷德里克·贝克"   , "image" : "弗.png" },
+{ "name": "大冢康生"   , "image" : "大.png" },
+{ "name": "高畑勋" , "image" : "高.png" },
+{ "name": "铃木敏夫" , "image" : "铃.png" },
+{ "name": "宫崎骏" , "image" : "宫.png" },
+{ "name": "小田部羊一" , "image" : "小.png" },
+
+],
+"edges":[
+{ "source": 0 , "target": 3 , "relation":"朋友" },
+{ "source": 1 , "target": 3 , "relation":"亦師亦友" },
+{ "source": 2 , "target": 3 , "relation":"東映動畫同事" },
+{ "source": 2 , "target": 5 , "relation":"東映動畫同事" },
+{ "source": 2 , "target": 6 , "relation":"東映動畫同事" },
+{ "source": 3 , "target": 4 , "relation":"吉卜力同事" },
+{ "source": 3 , "target": 5 , "relation":"吉卜力及東映動畫同事" },
+{ "source": 3 , "target": 6 , "relation":"東映動畫同事" },
+{ "source": 4 , "target": 5 , "relation":"吉卜力同事" },
+{ "source": 5 , "target": 6 , "relation":"東映動畫同事" },
+
+]
+}
