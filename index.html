@@ -1,0 +1,386 @@
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<div class="container">
+
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v2.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
+    <!DOCTYPE html>
+
+    <html lang="zh-cmn-Hant">
+
+    <head>
+        <meta charset="utf-8">
+
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <title>高畑勳的童話歲月</title>
+
+        <meta name="description" content="Free Bootstrap 4 Theme by uicookies.com">
+        <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+        <link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css">
+        <link rel="stylesheet" href="assets/fonts/ionicons/css/ionicons.min.css">
+        <link rel="stylesheet" href="assets/fonts/law-icons/font/flaticon.css">
+        <link rel="stylesheet" href="assets/fonts/fontawesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/css/slick.css">
+        <link rel="stylesheet" href="assets/css/slick-theme.css">
+        <link rel="stylesheet" href="assets/css/helpers.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    </head>
+
+
+    <style>
+        .nodetext {
+            font-size: 12px;
+            font-family: SimSun;
+            fill: #000000;
+        }
+        
+        .linetext {
+            font-size: 12px;
+            font-family: SimSun;
+            fill: #0000FF;
+            fill-opacity: 0.0;
+        }
+    </style>
+
+    <body>
+        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+        <div>
+            <audio controls autoplay loop>
+		<source id="audio_1" src="1.mp3" type="audio/mpeg" >
+	  </audio>
+        </div>
+
+        <section class=" pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(2.png);background-size: 100%;" id="section-home">
+
+            <div class="container">
+                <br><br>
+                <p>2018年4月5日,吉卜力工作室創始人之一,日本動畫大師高畑勳因肺癌在東京都內醫院逝世,享年82歲。<br> 出生於日本三重縣伊勢市的動畫電影導演、製作人高畑勳是吉卜力的核心人物。《輝夜姬物語》的製片人西村義明說：“沒有高畑勳就沒有吉卜力工作室。吉卜力所有人都是高畑勳帶出來的。發現宮崎駿的是他，教鈴木敏夫怎麼當製片人的也是他。”高畑勳還發掘了久石讓——他起用久石讓為宮崎駿的《風之谷》配樂時，久石讓還寂寂無名，此後卻成了日本電影音樂的標誌性人物。
+                </p>
+                <br><br>
+                <script>
+                    var width = 400;
+
+                    var height = 300;
+
+
+
+                    var svg = d3.select("body_A")
+
+                    .append("svg")
+
+                    .attr("width", width)
+
+                    .attr("height", height);
+
+                    var padding = {
+
+                        left: 30,
+
+                        right: 30,
+
+                        top: 20,
+
+                        bottom: 20
+
+                    };
+
+                    var dataset = [9, 16, 8, 3, 4];
+
+                    var xScale = d3.scale.ordinal()
+
+                    .domain(d3.range(dataset.length), )
+
+                    .rangeRoundBands([0, width - padding.left - padding.right]);
+
+                    var yScale = d3.scale.linear()
+
+                    .domain([0, d3.max(dataset)])
+
+                    .range([height - padding.top - padding.bottom, 0]);
+
+                    var xAxis = d3.svg.axis()
+
+                    .scale(xScale)
+
+                    .orient("bottom");
+
+                    var yAxis = d3.svg.axis()
+
+                    .scale(yScale)
+
+                    .orient("left");
+
+                    var rectPadding = 4;
+
+                    var rects = svg.selectAll(".MyRect")
+
+                    .data(dataset)
+
+                    .enter()
+
+                    .append("rect")
+
+                    .attr("class", "MyRect")
+
+                    .attr("fill", "steelblue")
+
+                    .attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+
+                    .attr("x", function(d, i) {
+
+                        return xScale(i) + rectPadding / 2;
+
+                    })
+
+                    .attr("y", function(d) {
+
+                        return yScale(d);
+
+                    })
+
+                    .attr("width", xScale.rangeBand() - rectPadding)
+
+                    .attr("height", function(d) {
+
+                        return height - padding.top - padding.bottom - yScale(d);
+
+                    });
+
+
+
+                    var texts = svg.selectAll(".MyText")
+
+                    .data(dataset)
+
+                    .enter()
+
+                    .append("text")
+
+                    .attr("class", "MyText")
+
+                    .attr("fill", "white")
+
+                    .attr("text-anchor", "middle")
+
+                    .attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+
+                    .attr("x", function(d, i) {
+
+                        return xScale(i) + rectPadding / 2;
+
+                    })
+
+                    .attr("y", function(d) {
+
+                        return yScale(d);
+
+                    })
+
+                    .attr("dx", function() {
+
+                        return (xScale.rangeBand() - rectPadding) / 2;
+
+                    })
+
+                    .attr("dy", function(d) {
+
+                        return 20;
+
+                    })
+
+                    .text(function(d) {
+
+                        return d;
+
+                    });
+
+                    svg.append("g")
+
+                    .attr("class", "axis")
+
+                    .attr("transform", "translate(" + padding.left + "," + (height - padding.bottom) + ")")
+
+                    .call(xAxis);
+
+                    svg.append("g")
+
+                    .attr("class", "axis")
+
+                    .attr("transform", "translate(" + padding.left + "," + padding.top + ")")
+
+                    .call(yAxis);
+                </script>
+                <br><br>
+                <p>
+                    高畑勳自己的動畫作品包括早年在中國播出的《三千里尋母記》、《海蒂》等動畫電視片，及《太陽王子·霍爾斯大冒險》、《熊貓小熊貓》、《螢火蟲之墓》、《思緒翩翩》、《百變狸貓》、《我的鄰居山田君》等動畫電影。
+                    <br> 從上表可以看出，他在上世紀60年代有9篇作品，70年代有16篇，80年代有8篇，90年代有3篇，但進入本世紀以來，僅有4篇作品面世。
+
+                </p>
+                <br><br>
+
+                <script>
+                    var width = 1000;
+                    var height = 1000;
+                    var img_w = 75;
+                    var img_h = 89;
+
+                    var svg = d3.select("body").append("svg")
+                        .attr("width", width)
+                        .attr("height", height);
+
+
+
+                    d3.json("relation.json", function(error, root) {
+
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log(root);
+
+                        var force = d3.layout.force()
+                            .nodes(root.nodes)
+                            .links(root.edges)
+                            .size([width, height])
+                            .linkDistance(200)
+                            .charge(-1500)
+                            .start();
+
+                        var edges_line = svg.selectAll("line")
+                            .data(root.edges)
+                            .enter()
+                            .append("line")
+                            .style("stroke", "#ccc")
+                            .style("stroke-width", 1);
+
+                        var edges_text = svg.selectAll(".linetext")
+                            .data(root.edges)
+                            .enter()
+                            .append("text")
+                            .attr("class", "linetext")
+                            .text(function(d) {
+                                return d.relation;
+                            });
+
+
+                        var nodes_img = svg.selectAll("image")
+                            .data(root.nodes)
+                            .enter()
+                            .append("image")
+                            .attr("width", img_w)
+                            .attr("height", img_h)
+                            .attr("xlink:href", function(d) {
+                                return d.image;
+                            })
+                            .on("mouseover", function(d, i) {
+
+                                edges_text.style("fill-opacity", function(edge) {
+                                    if (edge.source === d || edge.target === d) {
+                                        return 1.0;
+                                    }
+                                });
+                            })
+                            .on("mouseout", function(d, i) {
+
+                                edges_text.style("fill-opacity", function(edge) {
+                                    if (edge.source === d || edge.target === d) {
+                                        return 0.0;
+                                    }
+                                });
+                            })
+                            .call(force.drag);
+
+                        var text_dx = -20;
+                        var text_dy = 20;
+
+                        var nodes_text = svg.selectAll(".nodetext")
+                            .data(root.nodes)
+                            .enter()
+                            .append("text")
+                            .attr("class", "nodetext")
+                            .attr("dx", text_dx)
+                            .attr("dy", text_dy)
+                            .text(function(d) {
+                                return d.name;
+                            });
+
+
+                        force.on("tick", function() {
+
+
+                            root.nodes.forEach(function(d, i) {
+                                d.x = d.x - img_w / 2 < 0 ? img_w / 2 : d.x;
+                                d.x = d.x + img_w / 2 > width ? width - img_w / 2 : d.x;
+                                d.y = d.y - img_h / 2 < 0 ? img_h / 2 : d.y;
+                                d.y = d.y + img_h / 2 + text_dy > height ? height - img_h / 2 - text_dy : d.y;
+                            });
+
+
+                            edges_line.attr("x1", function(d) {
+                                return d.source.x;
+                            });
+                            edges_line.attr("y1", function(d) {
+                                return d.source.y;
+                            });
+                            edges_line.attr("x2", function(d) {
+                                return d.target.x;
+                            });
+                            edges_line.attr("y2", function(d) {
+                                return d.target.y;
+                            });
+
+
+                            edges_text.attr("x", function(d) {
+                                return (d.source.x + d.target.x) / 2;
+                            });
+                            edges_text.attr("y", function(d) {
+                                return (d.source.y + d.target.y) / 2;
+                            });
+
+
+                            nodes_img.attr("x", function(d) {
+                                return d.x - img_w / 2;
+                            });
+                            nodes_img.attr("y", function(d) {
+                                return d.y - img_h / 2;
+                            });
+
+                            nodes_text.attr("x", function(d) {
+                                return d.x
+                            });
+                            nodes_text.attr("y", function(d) {
+                                return d.y + img_w / 2;
+                            });
+                        });
+                    });
+                </script>
+                <br><br>
+                <p>在高畑勋的一生中，有几位朋友对他意义深远，从上表人物关系图中可以看出，首先，宫崎骏为高畑勋在制作《太阳王子 霍尔斯的大冒险》时提拔的后辈，也是高畑在东映动画员工工会里的同事。从一同在东映动画工作起到成立吉卜力工作室后，两人皆多次互相搭档、携手创作出多项著名的电视、电影动画作品。
+                    <br> 铃木敏夫原是动画杂志《Animage》的记者，因有专题采访的需要而结识了高畑勋和宫崎骏两人，之后也成为吉卜力工作室的核心人物及制作人。在高畑勋与宫崎骏当中；铃木敏夫常担任两人之间的协调者。当时高畑勋在宫崎骏制作《风之谷》时；曾多次拒绝接任该动画的制作人，后续也是在铃木敏夫的强力请求下才出面接任。铃木敏夫在与高畑勋的共事中，学到了许多如何成为一名制作人的要领。
+                    <br> 大冢康生是东映动画公司成立入社的第一届职员，并且为高畑勋和宫崎骏一同创作《太阳王子 霍尔斯的大冒险》的工作伙伴，后续也在《熊猫家族》、《小麻烦千惠》里负责作画监督。
+                    <br> 小田部羊一与高畑勋同期进入东映动画的动画家，也是高畑勋在执导世界名作剧场系列作品期间的核心成员之一，多次担任作品中的作画监督及角色设计。
+                    <br> 尤里·诺里斯金是俄罗斯动画导演。高畑勋除了与诺里斯金有著交流往来关系外，也特别为对方的代表动画作品《故事中的故事》，写了一本讲解的书籍《故事中的故事─映像诗的世界》。
+                    <br> 弗雷德里克·贝克对高畑勲影响颇深，作品主要围绕自然生活，作品《crac!》是高畑最喜欢的，吉卜力也曾企划他的展览于日本展出。2013年在《辉耀姬物语》完成后高畑亲自带著作品拜访当时病重的他，弗雷德里克·贝克也将作品《crac!》的最后一帧画赠与高畑，同年年底病逝。
+                </p>
+
+    </body>
+
+    </html>
