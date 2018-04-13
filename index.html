@@ -1,152 +1,236 @@
-<html>
 
-  
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<style>
-.nodetext {
-	font-size: 35px ;
-	font-family: SimSun;
-	fill:#000000;
-}
-.linetext {
-	font-size: 24px ;
-	font-family: SimSun;
-	fill:#0000FF;
-	<!-- 关系文字是否显示-->
-	fill-opacity:1.0;
-}
-</style>
+	<!DOCTYPE html>
+	<html lang="zh-cmn-Hant">
+	
+	<head>
+		<meta charset="utf-8">
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<meta name="description" content="Free Bootstrap 4 Theme by uicookies.com">
+		<meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+	
+		<link href="https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600|Montserrat:200,300,400" rel="stylesheet">
+	
+		<link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css">
+		<link rel="stylesheet" href="assets/fonts/ionicons/css/ionicons.min.css">
+		<link rel="stylesheet" href="assets/fonts/law-icons/font/flaticon.css">
+	
+		<link rel="stylesheet" href="assets/fonts/fontawesome/css/font-awesome.min.css">
+	
+	
+		<link rel="stylesheet" href="assets/css/slick.css">
+		<link rel="stylesheet" href="assets/css/slick-theme.css">
+	
+		<link rel="stylesheet" href="assets/css/helpers.css">
+		<link rel="stylesheet" href="assets/css/style.css">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+		<section class=" pb_cover_v1 text-left cover-bg-black cover-bg-opacity-4" style="background-image: url(2.png);background-size: 100%;" id="section-home">
+			<div class="container">
+				<div class="row align-items-left ">
+			
+	
+						<h1 class="heading mb-3"> <br><br><br><br><br><strong><br><br>高畑勳的童話歲月</strong>
+						</h1>
+					
+	
+					</div>
+			</div>
+		</section>
+	
+	
+	
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <div>
+        <audio controls autoplay loop>
+<source id="audio_1" src="1.mp3" type="audio/mpeg" >
+</audio>
+    </div>
+
+    <style>
+        .nodetext {
+            font-size: 35px;
+            font-family: SimSun;
+            fill: #000000;
+        }
+        
+        .linetext {
+            font-size: 24px;
+            font-family: SimSun;
+            fill: #F39C12;
+            fill-opacity: 1.0;
+        }
+    </style>
 </head>
+
 <body>
-<script src="http://d3js.org/d3.v3.min.js" charset="gb2312"></script>
-<script>		   
-		
-		//var width = 1000;
-		//var height = 1000;
-		//整个视图宽高
-  var width= document.body.clientWidth*1; 
-  var height=document.body.clientHeight ; 
-  
-		//var img_w = 77;
-		//var img_h = 90;
-		//图片宽高
-		var img_w = 75;
-		var img_h = 88;
-		
-		
-		var svg = d3.select("body").append("svg")
-								.attr("width",width)
-								.attr("height",height);
-		
-		
-		
-		d3.json("relation.json",function(error,root){
-			
-			if( error ){
-				return console.log(error);
-			}
-			console.log(root);
-			
-			var force = d3.layout.force()
-							.nodes(root.nodes)
-							.links(root.edges)
-							.size([width,height])
-							.linkDistance(600)
-							.charge(-height*2)
-							.start();
-							
-			var edges_line = svg.selectAll("line")
-								.data(root.edges)
-								.enter()
-								.append("line")
-								.style("stroke","#ccc")
-								.style("stroke-width",5);
-								
-			var edges_text = svg.selectAll(".linetext")
-								.data(root.edges)
-								.enter()
-								.append("text")
-								.attr("class","linetext")
-								.text(function(d){
-									return d.relation;
-								});
-			
-								
-			var nodes_img = svg.selectAll("image")
-								.data(root.nodes)
-								.enter()
-								.append("image")
-								.attr("width",img_w)
-								.attr("height",img_h)
-								.attr("xlink:href",function(d){
-									return d.image;
-								})
-								.on("mouseover",function(d,i){
-									//显示连接线上的文字
-									edges_text.style("fill-opacity",function(edge){
-										if( edge.source === d || edge.target === d ){
-											return 1.0;
-										}
-									});
-								})
-								.on("mouseout",function(d,i){
-									//隐去连接线上的文字
-									edges_text.style("fill-opacity",function(edge){
-										if( edge.source === d || edge.target === d ){
-											return 1.0;
-										}
-									});
-								})
-								.call(force.drag);
-			
-			//文字相对距离
-			var text_dx = -45;
-			var text_dy = 35;
-			
-			var nodes_text = svg.selectAll(".nodetext")
-								.data(root.nodes)
-								.enter()
-								.append("text")
-								.attr("class","nodetext")
-								.attr("dx",text_dx)
-								.attr("dy",text_dy)
-								.text(function(d){
-									return d.name;
-								});
-			
-								
-			force.on("tick", function(){
-				
-				//限制结点的边界
-				root.nodes.forEach(function(d,i){
-					d.x = d.x - img_w/2 < 0     ? img_w/2 : d.x ;
-					d.x = d.x + img_w/2 > width ? width - img_w/2 : d.x ;
-					d.y = d.y - img_h/2 < 0      ? img_h/2 : d.y ;
-					d.y = d.y + img_h/2 + text_dy > height ? height - img_h/2 - text_dy : d.y ;
-				});
-			
-				//更新连接线的位置
-				 edges_line.attr("x1",function(d){ return d.source.x; });
-				 edges_line.attr("y1",function(d){ return d.source.y; });
-				 edges_line.attr("x2",function(d){ return d.target.x; });
-				 edges_line.attr("y2",function(d){ return d.target.y; });
-				 
-				 //更新连接线上文字的位置
-				 edges_text.attr("x",function(d){ return (d.source.x + d.target.x) / 2 ; });
-				 edges_text.attr("y",function(d){ return (d.source.y + d.target.y) / 2 ; });
-				 
-				 
-				 //更新结点图片和文字
-				 nodes_img.attr("x",function(d){ return d.x - img_w/2; });
-				 nodes_img.attr("y",function(d){ return d.y - img_h/2; });
-				 
-				 nodes_text.attr("x",function(d){ return d.x });
-				 nodes_text.attr("y",function(d){ return d.y + img_w/2; });
-			});
-		});
-		  
+    <script src="http://d3js.org/d3.v3.min.js" charset="gb2312"></script>
+
+    <div class="container">
+        <br><br><br> <br>
+        <p>2018年4月5日,吉卜力工作室創始人之一,日本動畫大師高畑勳因肺癌在東京都內醫院逝世,享年82歲。
+            <br> <br> <br> 出生於日本三重縣伊勢市的動畫電影導演、製作人高畑勳是吉卜力的核心人物。《輝夜姬物語》的製片人西村義明說：“沒有高畑勳就沒有吉卜力工作室。吉卜力所有人都是高畑勳帶出來的。發現宮崎駿的是他，教鈴木敏夫怎麼當製片人的也是他。”高畑勳還發掘了久石讓——他起用久石讓為宮崎駿的《風之谷》配樂時，久石讓還寂寂無名，此後卻成了日本電影音樂的標誌性人物。
+        </p>
+        <br><br><br> <br>
+        <svg id="chart" width="1000" height="1000"></svg>
+        <script>
+            var width = 1000;
+            var height = 1000;
+
+            //var img_w = 77;
+            //var img_h = 90;
+            //ͼƬ���
+            var img_w = 100;
+            var img_h = 100;
+
+
+            var svg = d3.select("#chart").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+
+
+            d3.json("relation.json", function(error, root) {
+
+                if (error) {
+                    return console.log(error);
+                }
+                console.log(root);
+
+                var force = d3.layout.force()
+                    .nodes(root.nodes)
+                    .links(root.edges)
+                    .size([width, height])
+                    .linkDistance(600)
+                    .charge(-height * 2)
+                    .start();
+
+                var edges_line = svg.selectAll("line")
+                    .data(root.edges)
+                    .enter()
+                    .append("line")
+                    .style("stroke", "#ccc")
+                    .style("stroke-width", 5);
+
+                var edges_text = svg.selectAll(".linetext")
+                    .data(root.edges)
+                    .enter()
+                    .append("text")
+                    .attr("class", "linetext")
+                    .text(function(d) {
+                        return d.relation;
+                    });
+
+
+                var nodes_img = svg.selectAll("image")
+                    .data(root.nodes)
+                    .enter()
+                    .append("image")
+                    .attr("width", img_w)
+                    .attr("height", img_h)
+                    .attr("xlink:href", function(d) {
+                        return d.image;
+                    })
+                    .on("mouseover", function(d, i) {
+                        //��ʾ�������ϵ�����
+                        edges_text.style("fill-opacity", function(edge) {
+                            if (edge.source === d || edge.target === d) {
+                                return 1.0;
+                            }
+                        });
+                    })
+                    .on("mouseout", function(d, i) {
+                        //��ȥ�������ϵ�����
+                        edges_text.style("fill-opacity", function(edge) {
+                            if (edge.source === d || edge.target === d) {
+                                return 1.0;
+                            }
+                        });
+                    })
+                    .call(force.drag);
+
+                //������Ծ���
+                var text_dx = -45;
+                var text_dy = 35;
+
+                var nodes_text = svg.selectAll(".nodetext")
+                    .data(root.nodes)
+                    .enter()
+                    .append("text")
+                    .attr("class", "nodetext")
+                    .attr("dx", text_dx)
+                    .attr("dy", text_dy)
+                    .text(function(d) {
+                        return d.name;
+                    });
+
+
+                force.on("tick", function() {
+
+                    //���ƽ��ı߽�
+                    root.nodes.forEach(function(d, i) {
+                        d.x = d.x - img_w / 2 < 0 ? img_w / 2 : d.x;
+                        d.x = d.x + img_w / 2 > width ? width - img_w / 2 : d.x;
+                        d.y = d.y - img_h / 2 < 0 ? img_h / 2 : d.y;
+                        d.y = d.y + img_h / 2 + text_dy > height ? height - img_h / 2 - text_dy : d.y;
+                    });
+
+                    //���������ߵ�λ��
+                    edges_line.attr("x1", function(d) {
+                        return d.source.x;
+                    });
+                    edges_line.attr("y1", function(d) {
+                        return d.source.y;
+                    });
+                    edges_line.attr("x2", function(d) {
+                        return d.target.x;
+                    });
+                    edges_line.attr("y2", function(d) {
+                        return d.target.y;
+                    });
+
+                    //���������������ֵ�λ��
+                    edges_text.attr("x", function(d) {
+                        return (d.source.x + d.target.x) / 2;
+                    });
+                    edges_text.attr("y", function(d) {
+                        return (d.source.y + d.target.y) / 2;
+                    });
+
+
+                    //���½��ͼƬ������
+                    nodes_img.attr("x", function(d) {
+                        return d.x - img_w / 2;
+                    });
+                    nodes_img.attr("y", function(d) {
+                        return d.y - img_h / 2;
+                    });
+
+                    nodes_text.attr("x", function(d) {
+                        return d.x
+                    });
+                    nodes_text.attr("y", function(d) {
+                        return d.y + img_w / 2;
+                    });
+                });
+            });
         </script>
+
+        <br><br><br> <br>
+        <p>在高畑勳的一生中，有幾位朋友對他意義深遠，從上表人物關係圖中可以看出，首先，宮崎駿為高畑勳在製作《太陽王子 霍爾斯的大冒險》時提拔的後輩，也是高畑在東映動畫員工工會里的同事。從一同在東映動畫工作起到成立吉卜力工作室後，兩人皆多次互相搭檔、攜手創作出多項著名的電視、電影動畫作品。
+            <br> <br> <br>鈴木敏夫原是動畫雜誌《Animage》的記者，因有專題採訪的需要而結識了高畑勳和宮崎駿兩人，之後也成為吉卜力工作室的核心人物及製作人。在高畑勳與宮崎駿當中；鈴木敏夫常擔任兩人之間的協調者。當時高畑勳在宮崎駿製作《風之谷》時；曾多次拒絕接任該動畫的製作人，後續也是在鈴木敏夫的強力請求下才出面接任。鈴木敏夫在與高畑勳的共事中，學到了許多如何成為一名製作人的要領。
+            <br> <br> <br>大塚康生是東映動畫公司成立入社的第一屆職員，並且為高畑勳和宮崎駿一同創作《太陽王子 霍爾斯的大冒險》的工作夥伴，後續也在《熊貓家族》、《小麻煩千惠》里負責作畫監督。
+            <br> <br> <br> 小田部羊一與高畑勳同期進入東映動畫的動畫家，也是高畑勳在執導世界名作劇場系列作品期間的核心成員之一，多次擔任作品中的作畫監督及角色設計。
+            <br> <br> <br> 尤里·諾里斯金是俄羅斯動畫導演。高畑勳除了與諾里斯金有著交流往來關係外，也特別為對方的代表動畫作品《故事中的故事》，寫了一本講解的書籍《故事中的故事─映射詩的世界》。
+            <br> <br> <br> 弗雷德里克·貝克對高畑勲影響頗深，作品主要圍繞自然生活，作品《crac!》是高畑最喜歡的，吉卜力也曾企劃他的展覽於日本展出。2013年在《輝夜姬物語》完成後高畑親自帶著作品拜訪當時病重的他，弗雷德里克·貝克也將作品《crac!》的最後一幀畫贈與高畑，同年年底病逝。
+        </p>
+        <br><br><br> <br>
 
 </body>
 
