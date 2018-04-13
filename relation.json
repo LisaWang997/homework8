@@ -6,7 +6,7 @@
 { "name": "高畑勋" , "image" : "高.png" },
 { "name": "铃木敏夫" , "image" : "铃.png" },
 { "name": "宫崎骏" , "image" : "宫.png" },
-{ "name": "小田部羊一" , "image" : "小.png" },
+{ "name": "小田部羊一" , "image" : "小.png" }
 
 ],
 "edges":[
@@ -19,7 +19,7 @@
 { "source": 3 , "target": 5 , "relation":"吉卜力及東映動畫同事" },
 { "source": 3 , "target": 6 , "relation":"東映動畫同事" },
 { "source": 4 , "target": 5 , "relation":"吉卜力同事" },
-{ "source": 5 , "target": 6 , "relation":"東映動畫同事" },
+{ "source": 5 , "target": 6 , "relation":"東映動畫同事" }
 
 ]
 }
