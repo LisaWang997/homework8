@@ -230,7 +230,152 @@
 
                 </p>
                 <br><br><br>  <br> 
+               <script>
 
+
+                    var width = 1500;
+                    var height = 1500;
+                    var img_w = 75;
+                    var img_h = 89;
+                    var nodetext {font-size: 12px;font-family: SimSun;fill: #000000;}
+                    var linetext {
+            font-size: 12px;
+            font-family: SimSun;
+            fill: #0000FF;
+   }
+      
+                    var svg = d3.select("body").append("svg")
+                        .attr("width", width)
+                        .attr("height", height);
+                         .nodetext {
+            
+        
+   
+
+
+                    d3.json("relation.json", function(error, root) {
+
+                        if (error) {
+                            return console.log(error);
+                        }
+                        console.log(root);
+
+                        var force = d3.layout.force()
+                            .nodes(root.nodes)
+                            .links(root.edges)
+                            .size([width, height])
+                            .linkDistance(200)
+                            .charge(-1500)
+                            .start();
+
+                        var edges_line = svg.selectAll("line")
+                            .data(root.edges)
+                            .enter()
+                            .append("line")
+                            .style("stroke", "#ccc")
+                            .style("stroke-width", 1);
+
+                        var edges_text = svg.selectAll(".linetext")
+                            .data(root.edges)
+                            .enter()
+                            .append("text")
+                            .attr("class", "linetext")
+                            .text(function(d) {
+                                return d.relation;
+                            });
+
+
+                        var nodes_img = svg.selectAll("image")
+                            .data(root.nodes)
+                            .enter()
+                            .append("image")
+                            .attr("width", img_w)
+                            .attr("height", img_h)
+                            .attr("xlink:href", function(d) {
+                                return d.image;
+                            })
+                            .on("mouseover", function(d, i) {
+
+                                edges_text.style("fill-opacity", function(edge) {
+                                    if (edge.source === d || edge.target === d) {
+                                        return 1.0;
+                                    }
+                                });
+                            })
+                            .on("mouseout", function(d, i) {
+
+                                edges_text.style("fill-opacity", function(edge) {
+                                    if (edge.source === d || edge.target === d) {
+                                        return 0.0;
+                                    }
+                                });
+                            })
+                            .call(force.drag);
+
+                        var text_dx = -20;
+                        var text_dy = 20;
+
+                        var nodes_text = svg.selectAll(".nodetext")
+                            .data(root.nodes)
+                            .enter()
+                            .append("text")
+                            .attr("class", "nodetext")
+                            .attr("dx", text_dx)
+                            .attr("dy", text_dy)
+                            .text(function(d) {
+                                return d.name;
+                            });
+
+
+                        force.on("tick", function() {
+
+
+                            root.nodes.forEach(function(d, i) {
+                                d.x = d.x - img_w / 2 < 0 ? img_w / 2 : d.x;
+                                d.x = d.x + img_w / 2 > width ? width - img_w / 2 : d.x;
+                                d.y = d.y - img_h / 2 < 0 ? img_h / 2 : d.y;
+                                d.y = d.y + img_h / 2 + text_dy > height ? height - img_h / 2 - text_dy : d.y;
+                            });
+
+
+                            edges_line.attr("x1", function(d) {
+                                return d.source.x;
+                            });
+                            edges_line.attr("y1", function(d) {
+                                return d.source.y;
+                            });
+                            edges_line.attr("x2", function(d) {
+                                return d.target.x;
+                            });
+                            edges_line.attr("y2", function(d) {
+                                return d.target.y;
+                            });
+
+
+                            edges_text.attr("x", function(d) {
+                                return (d.source.x + d.target.x) / 2;
+                            });
+                            edges_text.attr("y", function(d) {
+                                return (d.source.y + d.target.y) / 2;
+                            });
+
+
+                            nodes_img.attr("x", function(d) {
+                                return d.x - img_w / 2;
+                            });
+                            nodes_img.attr("y", function(d) {
+                                return d.y - img_h / 2;
+                            });
+
+                            nodes_text.attr("x", function(d) {
+                                return d.x
+                            });
+                            nodes_text.attr("y", function(d) {
+                                return d.y + img_w / 2;
+                            });
+                        });
+                    });
+                </script>
                 <br><br><br>  <br> 
                 <p>在高畑勳的一生中，有幾位朋友對他意義深遠，從上表人物關係圖中可以看出，首先，宮崎駿為高畑勳在製作《太陽王子 霍爾斯的大冒險》時提拔的後輩，也是高畑在東映動畫員工工會里的同事。從一同在東映動畫工作起到成立吉卜力工作室後，兩人皆多次互相搭檔、攜手創作出多項著名的電視、電影動畫作品。
                     <br> <br>  <br>鈴木敏夫原是動畫雜誌《Animage》的記者，因有專題採訪的需要而結識了高畑勳和宮崎駿兩人，之後也成為吉卜力工作室的核心人物及製作人。在高畑勳與宮崎駿當中；鈴木敏夫常擔任兩人之間的協調者。當時高畑勳在宮崎駿製作《風之谷》時；曾多次拒絕接任該動畫的製作人，後續也是在鈴木敏夫的強力請求下才出面接任。鈴木敏夫在與高畑勳的共事中，學到了許多如何成為一名製作人的要領。
