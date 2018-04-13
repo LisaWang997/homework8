@@ -232,7 +232,17 @@
                 <br><br><br>  <br> 
 
                 <script>
-  .nodetext {
+
+
+                    var width = 1500;
+                    var height = 1500;
+                    var img_w = 75;
+                    var img_h = 89;
+
+                    var svg = d3.select("body").append("svg")
+                        .attr("width", width)
+                        .attr("height", height);
+                         .nodetext {
             font-size: 12px;
             font-family: SimSun;
             fill: #000000;
@@ -244,16 +254,6 @@
             fill: #0000FF;
    }
       
-
-                    var width = 1500;
-                    var height = 1500;
-                    var img_w = 75;
-                    var img_h = 89;
-
-                    var svg = d3.select("body").append("svg")
-                        .attr("width", width)
-                        .attr("height", height);
-
 
 
                     d3.json("relation.json", function(error, root) {
